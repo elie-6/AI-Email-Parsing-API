@@ -232,5 +232,6 @@ There are simple test scripts and seed scripts under `test/` to populate a clien
 
 This repo is practical and opinionated. It's not perfect. It deliberately favors explicit, maintainable patterns (separate raw vs derived, parse flags, idempotent constraints) over clever one-liners.
 
-If you clone it, you'll get a real API you can run locally and extend. It shows concrete engineering decisions — which is the point.
+If you clone it, you'll get a real API you can run locally and extend. It shows concrete engineering decisions — which is the point.   
+
 **This repository intentionally contains only the backend API. The frontend is developed separately and consumes this service as a client.**
