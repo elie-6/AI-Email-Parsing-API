@@ -1,0 +1,70 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =====================
+# Virtual Environments
+# =====================
+venv/
+env/
+ENV/
+.venv/
+
+# =====================
+# Environment / Secrets
+# =====================
+.env
+.env.*
+backend/config.py
+backend/config/
+credentials.json
+token.json
+*.pem
+*.key
+
+# =====================
+# Database / Local State
+# =====================
+*.sqlite3
+*.db
+alembic/versions/
+
+# =====================
+# Logs
+# =====================
+*.log
+
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# IDEs
+# =====================
+.vscode/
+.idea/
+
+# =====================
+# Tests artifacts
+# =====================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =====================
+# Build / Packaging
+# =====================
+build/
+dist/
+*.egg-info/
+
+# =====================
+# Cache / Temp
+# =====================
+.cache/
+tmp/
