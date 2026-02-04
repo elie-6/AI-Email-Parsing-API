@@ -18,7 +18,7 @@ A FastAPI service that:
 
 This is useful as a demonstrable backend for:
 
-- Showing system design / API skill
+- Correct system design / API implementation
 - Running an ingestion + parsing pipeline locally
 - Prototyping a SaaS workflow: collect emails → parse → notify
 
@@ -46,7 +46,6 @@ This is useful as a demonstrable backend for:
 | `GET` | `/dashboard/emails?limit=&offset=` | Returns parsed emails for authenticated user |
 | `GET` | `/dashboard/email/{email_id}` | Single email (with parsed result) |
 | `POST` | `/dashboard/parse` | Trigger fetch + parse for connected Gmail accounts |
-| `GET` | `/health` | Health check |
 
 ---
 
@@ -155,17 +154,6 @@ uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
 
 ---
 
-## Common Developer Commands
-
-| Command | Description |
-|---------|-------------|
-| `python backend/create_tables.py` | Create tables quickly (dev) |
-| `python backend/reset_tables.py` | Drop & recreate (dev) |
-| `pytest` | Run tests (if tests included) |
-| `alembic revision --autogenerate -m "msg"` | Generate migration |
-| `alembic upgrade head` | Run migrations |
-
----
 
 ## API Examples
 
@@ -220,14 +208,12 @@ DELETE FROM clients WHERE id = 2;
 - **Use connection pooling** (SQLAlchemy settings, PG pool)
 - **Use batched writes and WAL batching** if you have high ingestion rates
 - **Add monitoring**: queue length, parse latency, DB slow queries
-- **Store large blobs** (raw content) in object storage when huge; keep references in DB
-- **Partition emails by time or client** if you expect very large tables
 - **Add rate limiting and request authentication** enforcement in front (e.g., API Gateway)
 - **Add Alembic migrations** for schema changes — DO NOT rely on `Base.metadata.create_all` for production schema evolution
 
 ---
 
-## Tests & Seeding
+## Tests
 
 There are simple test scripts and seed scripts under `test/` to populate a client, Gmail account, and fake parsed emails. Use them to see the dashboard return real data without calling Gmail or AI during development.
 
@@ -241,21 +227,10 @@ There are simple test scripts and seed scripts under `test/` to populate a clien
 
 ---
 
-## What's Intentionally Omitted
-
-- **Frontend** (the consumer) is intentionally excluded from this repo. The API is the focus.
-- **Production-ready queue and deployment config** (Dockerfiles, Kubernetes manifests) are not included here — they're straightforward next steps but out of scope for the demo.
-
----
-
-## License
-
-MIT
-
----
 
 ## Final Note
 
 This repo is practical and opinionated. It's not perfect. It deliberately favors explicit, maintainable patterns (separate raw vs derived, parse flags, idempotent constraints) over clever one-liners.
 
-If you clone it, you'll get a real API you can run locally and extend. It shows concrete engineering decisions you can explain in interviews — which is the point.
+If you clone it, you'll get a real API you can run locally and extend. It shows concrete engineering decisions — which is the point.
+**This repository intentionally contains only the backend API. The frontend is developed separately and consumes this service as a client.**
