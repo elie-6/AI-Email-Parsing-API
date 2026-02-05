@@ -137,12 +137,10 @@ ALGORITHM=    (encryption and decryption algorithm)
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 
 OPENAI_API_KEY=     (get from openai)
-
 ```
 
 3. **Create database & tables**:
 
-**Quick (development)**:
 ```bash
 python test/create_tables.py
 ```
@@ -236,7 +234,7 @@ This repo is practical and opinionated. It's not perfect. It deliberately favors
 
 If you clone it, you'll get a real API you can run locally and extend. It shows concrete engineering decisions — which is the point.   
 
-
+----
 **This repository intentionally contains only the backend API. The frontend is developed separately and consumes this service as a client.**  
 
 ---
