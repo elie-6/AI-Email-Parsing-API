@@ -2,7 +2,7 @@
 
 An **AI-driven email ingestion + parsing pipeline** built with FastAPI.
 
-This is the backend API — handles OAuth-authorized Gmail ingestion, stores raw emails immutably, runs AI parsing, and sends notifications. It's a practical, work-ready backend you can run locally, test, and extend.
+This is a backend API — handles OAuth-authorized Gmail ingestion, stores raw emails immutably, runs AI parsing, and sends notifications. It's a practical, work-ready backend you can run locally, test, and extend.
 
 ---
 
@@ -96,7 +96,7 @@ This is useful as a demonstrable backend for:
 
 **N+1 prevention**: Use `selectinload` or similar eager-loading to avoid N+1 when loading emails + results.
 
-**Cursor pagination recommended**: Offset-based pagination is fine for small loads, but use cursor pagination for large scale to avoid performance degradation.
+**Cursor pagination**: Offset-based pagination is fine for small loads, but use cursor pagination for large scale to avoid performance degradation.
 
 **Use background workers**: The parse operation should be enqueued to a worker system (RQ / Celery / Just a background task during development).
 
@@ -126,23 +126,25 @@ pip install psycopg2-binary
 
 Create a `.env` or `backend/config.py` (do not commit secrets):
 ```
-DATABASE_URL=postgresql://user:pass@localhost:5432/leadapp
-SECRET_KEY=some-long-secret
-ALGORITHM=HS256
+EMAIL_FROM=    (email to send notifications from)
+EMAIL_APP_PASSWORD=      (Gmail SMTP app password for email_from)
+SMTP_PORT=      (choose port)  
+
+DATABASE_URL=postgresql://user:pass@localhost:5432/dbname
+
+SECRET_KEY=      (choose a string key, for access token)
+ALGORITHM=    (encryption and decryption algorithm)
 ACCESS_TOKEN_EXPIRE_MINUTES=60
-# any oauth client ids etc
+
+OPENAI_API_KEY=     (get from openai)
+
 ```
 
 3. **Create database & tables**:
 
-**Quick (development, destructive)**:
+**Quick (development)**:
 ```bash
-python backend/reset_tables.py
-```
-
-**Safer (recommended)**:
-```bash
-alembic upgrade head
+python test/create_tables.py
 ```
 
 4. **Start the server**:
@@ -234,4 +236,7 @@ This repo is practical and opinionated. It's not perfect. It deliberately favors
 
 If you clone it, you'll get a real API you can run locally and extend. It shows concrete engineering decisions — which is the point.   
 
-**This repository intentionally contains only the backend API. The frontend is developed separately and consumes this service as a client.**
+
+**This repository intentionally contains only the backend API. The frontend is developed separately and consumes this service as a client.**  
+
+---
