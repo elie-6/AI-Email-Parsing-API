@@ -37,6 +37,28 @@ This is useful as a demonstrable backend for:
 
 ---
 
+## Tech Stack
+
+**Language**: Python 3.11+ — modern language features, async-friendly  
+**Framework**: FastAPI — high-performance API framework with automatic OpenAPI docs  
+**Server**: Uvicorn + UVLoop — production-grade ASGI server with low-latency event loop  
+
+**Database & ORM**:
+- SQLAlchemy 2.0 — modern ORM with explicit, scalable data modeling
+- PostgreSQL — reliable relational database for structured, long-term storage
+
+**Validation & Auth**:
+- Pydantic v2 — strict data validation and serialization
+- JWT (python-jose) — stateless authentication suitable for distributed systems
+- Argon2 — secure password hashing (industry-grade)
+
+**HTTP & External Integration**:
+- HTTPX — async HTTP client for external service integration
+- Gmail API — OAuth-based access to user mailboxes
+- Google OAuth 2.0 — secure delegated authorization
+
+---
+
 ## API Endpoints
 
 | Method | Endpoint | Description |
